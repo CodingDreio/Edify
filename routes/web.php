@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+//Controllers
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +22,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// Routes
+
+// Edit Profile Page
+Route::get('/profile',[ProfileController::class,'index'])->name('editProfile');
