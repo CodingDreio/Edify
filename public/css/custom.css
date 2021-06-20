@@ -60,3 +60,23 @@ body{
 .bg-003300{
     background-color: #003300;
 }
+
+
+/*
+    Image Prewiew in modal Update Profile Picture
+*/
+
+.imgPrev{
+    margin: auto;
+    display: none;
+}
+
+.imgDef{
+    margin: auto;
+    display: block;
+}
+
+.imgWarning{
+    margin: auto;
+    display: none;
+}

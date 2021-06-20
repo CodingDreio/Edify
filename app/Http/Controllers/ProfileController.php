@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ProfileController extends Controller
 {
@@ -13,7 +15,10 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('profile.editProfile');
+        $id = Auth::id();
+        $user = User::where('id','=', $id)->get();
+        
+        return view('profile.viewProfile',['user'=>$user]);
     }
 
     /**
@@ -68,7 +73,29 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $defImg = Auth::user()->image;
+        $img = $request->imgInput;
+        if($img == null){
+            $imgName = $defImg;
+        }else{ 
+            $imgName = $id.'-'.time().'.'.$request->imgInput->extension();
+            $request->imgInput->move(public_path('img'),$imgName);
+            unlink("img/".$defImg);
+        }
+
         //
+        $user = User::where('id',$id)
+        ->update([
+            'name' => $request->input('nameInput'),
+            'address'=>$request->input('addressInput'),
+            'email'=>$request->input('emailInput'),
+            'mobile'=>$request->input('mobileInput'),
+            'gender'=>$request->get('sexInput'),
+            'description'=>$request->get('descInput'),
+            'image' => $imgName,
+        ]);
+    
+        return redirect('/profile');
     }
 
     /**

@@ -19,6 +19,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
 
 </head>
 <body>
@@ -82,12 +83,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('editProfile') }}"><i class="fas fa-user-edit" style="margin-right: 10px"></i> Profile</a>
+                                    <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user-edit" style="margin-right: 10px"></i> Profile</a>
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt" style="margin-right: 9px"></i>
+                                        <i class="fas fa-sign-out-alt" style="margin-right: 10px"></i>
                                         {{ __('Logout') }}
                                     </a>
 

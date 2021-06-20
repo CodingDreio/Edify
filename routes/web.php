@@ -28,7 +28,8 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-// Routes
+// // Routes
 
-// Edit Profile Page
-Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('editProfile');
+// // Edit Profile Page
+// Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('editProfile');
+Route::resource('/profile', ProfileController::class);
