@@ -37,7 +37,7 @@
 						<div class="card mb-3">
 							<div class="card-body">
 								<div class="row">
-									<div class="col-sm-2">
+									<div class="col-sm-3">
 										<h6 class="mb-0">Full Name</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
@@ -46,7 +46,7 @@
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-2">
+									<div class="col-sm-3">
 										<h6 class="mb-0">Address</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
@@ -55,7 +55,7 @@
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-2">
+									<div class="col-sm-3">
 										<h6 class="mb-0">Email</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
@@ -64,7 +64,7 @@
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-2">
+									<div class="col-sm-3">
 										<h6 class="mb-0">Mobile</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
@@ -73,7 +73,7 @@
 								</div>
 								<hr>
 								<div class="row">
-									<div class="col-sm-2">
+									<div class="col-sm-3">
 										<h6 class="mb-0">Sex</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
@@ -90,7 +90,66 @@
 								</div>
 							</div>
 						</div>
-						
+						<div class="card mb-3">
+							<div class="card-body">
+								{{-- <div class="align-items-center text-center"> --}}
+									<div class="row mt-3">
+										<div class="col-md-12 col-sm-12 align-items-center text-center">
+											<h3 style="color:#014e01"><b>Offered Subjects</b></h3>
+											<a href="#" class="btn btn-primary float-right">Update</a>
+										</div>
+										<div class="col-md-12 col-sm-12 mt-4">
+											<h4><b>Subject Name</b></h4>
+											<h6>Friday 10:00 AM to 12:00 PM</h6>
+											<h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+												Tempore ut unde, quis et suscipit sint numquam dolor iste esse doloremque</h6>
+											<div class="ml-4 mt-3">
+												<h5><b>Topics</b></h5>
+												<div class="ml-3 mt-3">
+													<div class="mb-3">
+														<h6><b>Topic title</b></h6>
+														<h6>Topic Description is to be put in here.</h6>
+													</div>
+													<div class="mb-3">
+														<h6><b>Topic title</b></h6>
+														<h6>Topic Description is to be put in here.</h6>
+													</div>
+													<div class="mb-3">
+														<h6><b>Topic title</b></h6>
+														<h6>Topic Description is to be put in here.</h6>
+													</div>
+												</div>
+											</div>
+											<hr>
+										</div>
+										<div class="col-md-12 col-sm-12 mt-4">
+											<h4><b>Subject Name</b></h4>
+											<h6>Friday 10:00 AM to 12:00 PM</h6>
+											<h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+												Tempore ut unde, quis et suscipit sint numquam dolor iste esse doloremque</h6>
+											<div class="ml-4 mt-3">
+												<h5><b>Topics</b></h5>
+												<div class="ml-3 mt-3">
+													<div class="mb-3">
+														<h6><b>Topic title</b></h6>
+														<h6>Topic Description is to be put in here.</h6>
+													</div>
+													<div class="mb-3">
+														<h6><b>Topic title</b></h6>
+														<h6>Topic Description is to be put in here.</h6>
+													</div>
+													<div class="mb-3">
+														<h6><b>Topic title</b></h6>
+														<h6>Topic Description is to be put in here.</h6>
+													</div>
+												</div>
+											</div>
+											<hr>
+										</div>
+									</div>
+								{{-- </div> --}}
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -173,12 +232,12 @@
 			</div>
 
 
-			{{-- Edit profile image --}}
-			{{-- <div class="modal fade" id="editProfilePicModal" tabindex="-1" role="dialog" aria-labelledby="editProfilePicModal" aria-hidden="true">
+			{{-- Add Subject Modal --}}
+			{{-- <div class="modal fade" id="addSubject" tabindex="-1" role="dialog" aria-labelledby="editProfilePicModal" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-centered" role="document">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Update Profile Picture</h5>
+							<h5 class="modal-title" id="exampleModalLongTitle">Add Subject</h5>
 							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 							</button>
@@ -186,13 +245,7 @@
 
 						<div class="modal-body">
 							<div class="align-items-center text-center">
-								<div class="align-items-center text-center" id="imgPreview">
-									<img src="{{ asset('img/'.$profile->image) }}" alt="Profile Picture" class="rounded-circle imgDef" width="150">
-									<img src="" alt="New Profile Picture" class="rounded-circle imgPrev" width="150">
-								</div>
-								<div class="mt-3">
-									<input type="file" name="imgInput" id="imgInput" accept="image/*">
-								</div>
+								
 							</div>
 						</div>
 

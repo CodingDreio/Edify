@@ -54,13 +54,16 @@ body{
 
 
 /* 
-    Navbar Background
+    Navbar
 */
 
 .bg-003300{
     background-color: #003300;
 }
 
+li:hover{
+    background-color: #008600;
+}
 
 /*
     Image Prewiew in modal Update Profile Picture
@@ -80,3 +83,4 @@ body{
     margin: auto;
     display: none;
 }
+

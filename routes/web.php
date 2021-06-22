@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 //Controllers
 use App\Http\Controllers\ProfileController;
+use App\Htttp\Controllers\SubjectsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // // Routes
 
-// // Edit Profile Page
-// Route::get('/profile', [ProfileController::class, 'index'])->middleware('auth')->name('editProfile');
+// // Edit Profile
 Route::resource('/profile', ProfileController::class);
+
+// Update Subjects
+Route::resource('/subject', SubjectsController::class);
