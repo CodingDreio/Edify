@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 //Controllers
 use App\Http\Controllers\ProfileController;
-use App\Htttp\Controllers\SubjectsController;
+use App\Http\Controllers\SubjectsController;
+use App\Http\Controllers\TopicsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,5 +35,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // // Edit Profile
 Route::resource('/profile', ProfileController::class);
 
+
 // Update Subjects
 Route::resource('/subject', SubjectsController::class);
+
+
+Route::resource('/topic', TopicsController::class);
+Route::get('/addTopic/{id}',[TopicsController::class,'addTopic'])->name('topic.addTopic');

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
+use App\Models\Topic;
 
-class SubjectsController extends Controller
+class TopicsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class SubjectsController extends Controller
      */
     public function index()
     {
-        return redirect()->route('profile.index');
+        
     }
 
     /**
@@ -25,7 +25,14 @@ class SubjectsController extends Controller
      */
     public function create()
     {
-        return view('subject.addSubject');
+        return view('subject.topic.addTopic');
+    }
+
+    public function addTopic($id)
+    {
+        $subject = Subject::where('id','=', $id)->get();
+        $topic = Topic::where('subjectID','=',$id)->get();
+        return view('subject.topic.addTopic',['subject'=>$subject,'topic'=>$topic]);
     }
 
     /**
@@ -35,20 +42,14 @@ class SubjectsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
-        
-        $id = Auth::id();
-        $sched = $request->get('dayInput').' '.$request->get('fromInput').' to '.$request->get('toInput');
-
-
-        $subject = Subject::create([
-            'userID'=>$id,
-            'subject'=>$request->input('subjectInput'),
-            'schedule'=>$sched,
-            'description'=>$request->get('descInput'),
-            'slot'=>$request->input('slotInput'),
+    {
+        $subjectID = $request->get('idInput');
+        $topic = Topic::create([
+            'subjectID'=>$request->get('idInput'),
+            'topic'=>$request->get('topicInput'),
+            'description'=>$request->get('topicDescInput'),
         ]);
-        return redirect()->route('topic.addTopic',$subject->id);
+        return redirect()->route('topic.addTopic',$subjectID);
     }
 
     /**
@@ -70,7 +71,7 @@ class SubjectsController extends Controller
      */
     public function edit($id)
     {
-        return view('subject.updateSubject');
+        //
     }
 
     /**

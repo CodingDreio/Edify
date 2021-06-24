@@ -56,19 +56,19 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('home') }}">
+                                <a class="nav-link text-white border-right" href="{{ route('home') }}">
                                     <i class="fas fa-home" style="margin-right: 5px"></i>
                                     Home
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#">
+                                <a class="nav-link text-white border-right" href="#">
                                     <i class="fas fa-chalkboard-teacher" style="margin-right: 5px"></i>
                                     Tutors
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="#">
+                                <a class="nav-link text-white border-right" href="#">
                                     <i class="fas fa-user-graduate" style="margin-right: 5px"></i>
                                     Tutees
                                 </a>
