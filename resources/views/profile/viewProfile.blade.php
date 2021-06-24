@@ -92,62 +92,78 @@
 						</div>
 						<div class="card mb-3">
 							<div class="card-body">
-								{{-- <div class="align-items-center text-center"> --}}
+								<div class="container">
 									<div class="row mt-3">
 										<div class="col-md-12 col-sm-12 align-items-center text-center">
 											<h3 style="color:#014e01"><b>Offered Subjects</b></h3>
-											<a href="#" class="btn btn-primary float-right">Update</a>
+											<a href="subject/create" class="btn btn-primary float-right">Add Subject</a>
 										</div>
-										<div class="col-md-12 col-sm-12 mt-4">
+										{{-- start loop here --}}
+										<div class="col-md-12 col-sm-12">
+											<hr  class="mb-5">
+											<a class="float-right" href="subject/edit">
+												<i class="fa fa-edit" style="color: #007c00"></i>
+												<b style="color: #007c00">Edit</b>
+											</a>
 											<h4><b>Subject Name</b></h4>
 											<h6>Friday 10:00 AM to 12:00 PM</h6>
 											<h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
 												Tempore ut unde, quis et suscipit sint numquam dolor iste esse doloremque</h6>
-											<div class="ml-4 mt-3">
+											<div class="container-fluid pt-3">
 												<h5><b>Topics</b></h5>
-												<div class="ml-3 mt-3">
+												<div class="m-3">
 													<div class="mb-3">
 														<h6><b>Topic title</b></h6>
 														<h6>Topic Description is to be put in here.</h6>
+														<hr>
 													</div>
 													<div class="mb-3">
 														<h6><b>Topic title</b></h6>
 														<h6>Topic Description is to be put in here.</h6>
+														<hr>
 													</div>
 													<div class="mb-3">
 														<h6><b>Topic title</b></h6>
 														<h6>Topic Description is to be put in here.</h6>
+														<hr>
 													</div>
 												</div>
 											</div>
-											<hr>
 										</div>
-										<div class="col-md-12 col-sm-12 mt-4">
+										<div class="col-md-12 col-sm-12">
+											<hr  class="mb-5">
+											<a class="float-right" href="subject/edit">
+												<i class="fa fa-edit" style="color: #007c00"></i>
+												<b style="color: #007c00">Edit</b>
+											</a>
 											<h4><b>Subject Name</b></h4>
 											<h6>Friday 10:00 AM to 12:00 PM</h6>
 											<h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
 												Tempore ut unde, quis et suscipit sint numquam dolor iste esse doloremque</h6>
-											<div class="ml-4 mt-3">
+											<div class="container-fluid pt-3">
 												<h5><b>Topics</b></h5>
-												<div class="ml-3 mt-3">
+												<div class="m-3">
 													<div class="mb-3">
 														<h6><b>Topic title</b></h6>
 														<h6>Topic Description is to be put in here.</h6>
+														<hr>
 													</div>
 													<div class="mb-3">
 														<h6><b>Topic title</b></h6>
 														<h6>Topic Description is to be put in here.</h6>
+														<hr>
 													</div>
 													<div class="mb-3">
 														<h6><b>Topic title</b></h6>
 														<h6>Topic Description is to be put in here.</h6>
+														<hr>
 													</div>
 												</div>
 											</div>
-											<hr>
 										</div>
+										{{-- end loop here --}}
 									</div>
-								{{-- </div> --}}
+								</div>
 							</div>
 						</div>
 					</div>
@@ -210,7 +226,7 @@
 										<select class="form-control" name="sexInput" required>
 											<option value="Male">Male</option>
 											<option value="Female">Female</option>
-										  </select>
+										</select>
 									</div>
 									<div class="form-group mt-2">
 										<label for="descInput"><b>Description:</b></label>
