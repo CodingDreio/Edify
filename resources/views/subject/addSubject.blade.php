@@ -34,7 +34,6 @@
                                     </select>
                                 </div>
                                 <div  class="col-sm-3">
-<<<<<<< HEAD
                                     <label for="fromInput"><b class="text-color-primary">From: </b></label>
                                     <input class="form-control" type="time" name="fromInput" required>
                                 </div>
@@ -44,26 +43,11 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <label for="slotInput"><b class="text-color-primary">Slots: </b></label>
-=======
-                                    <label for="fromInput"><b>From: </b></label>
-                                    <input class="form-control" type="time" name="fromInput" required>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="toInput"><b>To: </b></label>
-                                    <input class="form-control" type="time" name="toInput" required>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label for="slotInput"><b>Slots: </b></label>
->>>>>>> f828708f6e6bbeb2d3160828a8c701339fc57c53
                                     <input class="form-control" type="number" name="slotInput" required>
                                 </div>
                             </div>
                             <div class="form-group mt-2">
-<<<<<<< HEAD
                                 <hr class="hr-border mt-4">
-=======
-                                <hr>
->>>>>>> f828708f6e6bbeb2d3160828a8c701339fc57c53
                                 <div class="float-right">
                                     <a href="/profile" class="btn btn-secondary">Cancel</a>
                                     <input type="submit" class="btn btn-primary">
