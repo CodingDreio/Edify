@@ -14,4 +14,9 @@ class Topic extends Model
         'topic',
         'description',
     ];
+
+    // protected function topicSubject()
+    // {
+    //     return $this->belongsTo(Subject::class);
+    // }
 }

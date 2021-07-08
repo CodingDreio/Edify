@@ -11,7 +11,7 @@
 								<div class="align-items-center text-center">
 									<img src="{{ asset('img/'.$profile->image) }}" alt="Profile Picture" class="rounded-circle" width="150">
 									<div class="mt-3">
-										<h4>{{ $profile->name }}</h4>
+										<h4 class="text-color-title">{{ $profile->name }}</h4>
 										<p class="text-secondary mb-1">{{ $profile->description }}</p>
 										<hr>
 										<div class="row">
@@ -37,53 +37,57 @@
 						<div class="card mb-3">
 							<div class="card-body">
 								<div class="row">
+									<div class="col-md-12 col-sm-12 align-items-center text-center mb-3 mt-2">
+										<h3 class="text-color-title"><b>Profile Information</b></h3>
+									</div>
 									<div class="col-sm-3">
-										<h6 class="mb-0">Full Name</h6>
+										<h6 class="mb-0 pl-2">Full Name</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
-										{{ $profile->name }}
+										<h6 class="pl-2">{{ $profile->name }}</h6>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">
-										<h6 class="mb-0">Address</h6>
+										<h6 class="mb-0 pl-2">Address</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
-										{{ $profile->address }}
+										<h6 class="pl-2">{{ $profile->address }}</h6>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">
-										<h6 class="mb-0">Email</h6>
+										<h6 class="mb-0 pl-2">Email</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
-										{{ $profile->email }}
+										<h6 class="pl-2">{{ $profile->email }}</h6>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">
-										<h6 class="mb-0">Mobile</h6>
+										<h6 class="mb-0 pl-2">Mobile</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
-										{{ $profile->mobile }}
+										<h6 class="pl-2">{{ $profile->mobile }}</h6>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-3">
-										<h6 class="mb-0">Sex</h6>
+										<h6 class="mb-0 pl-2">Sex</h6>
 									</div>
 									<div class="col-sm-9 text-secondary">
-										{{ $profile->gender }}
+										<h6 class="pl-2">{{ $profile->gender }}</h6>
 									</div>
 								</div>
 								<hr>
 								<div class="row">
 									<div class="col-sm-12">
 										<button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#editProfileInfoModal">
+											<i class="fa fa-edit pr-2" style="color: #ffffff"></i>
 											Edit
 										</button>
 									</div>
@@ -95,73 +99,38 @@
 								<div class="container">
 									<div class="row mt-3">
 										<div class="col-md-12 col-sm-12 align-items-center text-center">
-											<h3 style="color:#014e01"><b>Offered Subjects</b></h3>
-											<a href="subject/create" class="btn btn-primary float-right">Add Subject</a>
+											<h3 class="text-color-title"><b>Offered Subjects</b></h3>
+											<a href="subject/create" class="btn btn-primary float-right"><i class="fa fa-folder-plus pr-2" style="color: #ffffff"></i>Add Subject</a>
 										</div>
-										{{-- start loop here --}}
-										<div class="col-md-12 col-sm-12">
-											<hr  class="mb-5">
-											<a class="float-right" href="subject/edit">
-												<i class="fa fa-edit" style="color: #007c00"></i>
-												<b style="color: #007c00">Edit</b>
-											</a>
-											<h4><b>Subject Name</b></h4>
-											<h6>Friday 10:00 AM to 12:00 PM</h6>
-											<h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-												Tempore ut unde, quis et suscipit sint numquam dolor iste esse doloremque</h6>
-											<div class="container-fluid pt-3">
-												<h5><b>Topics</b></h5>
-												<div class="m-3">
-													<div class="mb-3">
-														<h6><b>Topic title</b></h6>
-														<h6>Topic Description is to be put in here.</h6>
-														<hr>
-													</div>
-													<div class="mb-3">
-														<h6><b>Topic title</b></h6>
-														<h6>Topic Description is to be put in here.</h6>
-														<hr>
-													</div>
-													<div class="mb-3">
-														<h6><b>Topic title</b></h6>
-														<h6>Topic Description is to be put in here.</h6>
-														<hr>
+										@foreach ($subject as $sub)
+											<div class="col-md-12 col-sm-12">
+												<hr  class="mb-5 hr-border">
+												<a class="float-right" href="subject/{{ $sub->id }}/edit">
+													<i class="fa fa-edit" style="color: #007c00"></i>
+													<b class="text-color-edit">Edit</b>
+												</a>
+												<br>
+												<h4 class="text-color-primary"><b>{{ $sub->subject }}</b></h4>
+												<h6>{{ $sub->schedule }}</h6>
+												<h6><i>{{ $sub->description }}</i></h6>
+												<div class="container-fluid pt-3">
+													<h5 class="text-color-primary"><b>Topics</b></h5>
+													<div class="m-3">
+														@foreach ($topics as $topicsCollection)
+															@foreach ($topicsCollection as $topicVal)
+																@if ( $topicVal->subjectID == $sub->id)
+																	<div class="mb-3">
+																		<h6 class="text-color-primary"><b>{{ $topicVal->topic }}</b></h6>
+																		<h6>{{ $topicVal->description }}</h6>
+																		<hr>
+																	</div>
+																@endif
+															@endforeach
+														@endforeach
 													</div>
 												</div>
 											</div>
-										</div>
-										<div class="col-md-12 col-sm-12">
-											<hr  class="mb-5">
-											<a class="float-right" href="subject/edit">
-												<i class="fa fa-edit" style="color: #007c00"></i>
-												<b style="color: #007c00">Edit</b>
-											</a>
-											<h4><b>Subject Name</b></h4>
-											<h6>Friday 10:00 AM to 12:00 PM</h6>
-											<h6>Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-												Tempore ut unde, quis et suscipit sint numquam dolor iste esse doloremque</h6>
-											<div class="container-fluid pt-3">
-												<h5><b>Topics</b></h5>
-												<div class="m-3">
-													<div class="mb-3">
-														<h6><b>Topic title</b></h6>
-														<h6>Topic Description is to be put in here.</h6>
-														<hr>
-													</div>
-													<div class="mb-3">
-														<h6><b>Topic title</b></h6>
-														<h6>Topic Description is to be put in here.</h6>
-														<hr>
-													</div>
-													<div class="mb-3">
-														<h6><b>Topic title</b></h6>
-														<h6>Topic Description is to be put in here.</h6>
-														<hr>
-													</div>
-												</div>
-											</div>
-										</div>
-										{{-- end loop here --}}
+										@endforeach
 									</div>
 								</div>
 							</div>

@@ -17,10 +17,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/custom.js') }}" defer></script>
-
 </head>
 <body>
     <div id="app">
@@ -61,7 +57,7 @@
                                     Home
                                 </a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link text-white border-right" href="#">
                                     <i class="fas fa-chalkboard-teacher" style="margin-right: 5px"></i>
                                     Tutors
@@ -72,7 +68,26 @@
                                     <i class="fas fa-user-graduate" style="margin-right: 5px"></i>
                                     Tutees
                                 </a>
+                            </li> --}}
+                            <li class="nav-item">
+                                <a class="nav-link text-white border-right" href="{{ route('profile.index') }}">
+                                    <i class="fas fa-user" style="margin-right: 5px"></i>
+                                    {{ Auth::user()->name }}
+                                </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    <i class="fas fa-sign-out-alt" style="margin-right: 5px"></i>
+                                    {{ __('Logout') }}
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                            {{--
                             <li class="nav-item dropdown text-white">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                    <i class="fas fa-user" style="margin-right: 5px"></i>
@@ -94,6 +109,7 @@
                                     </form>
                                 </div>
                             </li>
+                              --}}
                         @endguest
                     </ul>
                 </div>
@@ -104,5 +120,9 @@
             @yield('content')
         </main>
     </div>
+    
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/custom.js') }}" defer></script>
 </body>
 </html>

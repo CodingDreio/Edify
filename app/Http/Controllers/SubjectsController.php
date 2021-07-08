@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Subject;
+use App\Models\Topic;
 
 class SubjectsController extends Controller
 {
@@ -48,7 +49,7 @@ class SubjectsController extends Controller
             'description'=>$request->get('descInput'),
             'slot'=>$request->input('slotInput'),
         ]);
-        return redirect()->route('topic.addTopic',$subject->id);
+        return redirect()->route('subject.edit',$subject->id);
     }
 
     /**
@@ -70,7 +71,9 @@ class SubjectsController extends Controller
      */
     public function edit($id)
     {
-        return view('subject.updateSubject');
+        $subject = Subject::where('id','=', $id)->get();
+        $topics = Topic::where('subjectID','=',$id)->get();
+        return view('subject.updateSubject',['subject'=>$subject, 'topics'=>$topics]);
     }
 
     /**
@@ -82,7 +85,17 @@ class SubjectsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $sched = $request->get('dayInput').' '.$request->get('fromInput').' to '.$request->get('toInput');
+
+        $subject = Subject::where('id',$id)
+        ->update([
+            'subject'=>$request->input('subjectInput'),
+            'schedule'=>$sched,
+            'description'=>$request->get('descInput'),
+            'slot'=>$request->input('slotInput'),
+        ]);
+
+        return redirect(route("subject.edit",$id));
     }
 
     /**
@@ -93,6 +106,8 @@ class SubjectsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $subject = Subject::find($id)->delete();
+
+        return redirect(route("profile.index"));
     }
 }

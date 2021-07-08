@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubjectsTable extends Migration
+class CreateHomeDefaultViewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,13 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('home_default_views', function (Blueprint $table) {
             $table->id();
             $table->foreignId('userID')
                 ->constrained('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->string('subject');
-            $table->string('schedule'); // d hh:mm
-            $table->text('description')->nullable();
-            $table->integer('slot');
+            $table->integer('default')->default(1); // 1 for tutor 2 for tutee
             $table->timestamps();
         });
     }
@@ -34,6 +31,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('home_default_views');
     }
 }

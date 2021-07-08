@@ -49,7 +49,7 @@ class TopicsController extends Controller
             'topic'=>$request->get('topicInput'),
             'description'=>$request->get('topicDescInput'),
         ]);
-        return redirect()->route('topic.addTopic',$subjectID);
+        return redirect()->route('subject.edit',$subjectID);
     }
 
     /**
@@ -71,7 +71,8 @@ class TopicsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $topic = Topic::where('id','=',$id)->get();
+        return view('subject.topic.updateTopic',['topic'=>$topic]);
     }
 
     /**
@@ -83,7 +84,13 @@ class TopicsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $subID = $request->get('subIDInput');
+        $topic = Topic::where('id',$id)->update([
+            'topic'=>$request->get('topicInput'),
+            'description'=>$request->get('descInput'),
+        ]);
+
+        return redirect(route("subject.edit",$subID));
     }
 
     /**
@@ -94,6 +101,14 @@ class TopicsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $tpc = Topic::where('id','=',$id)->get();
+        $subID;
+        foreach($tpc as $t){
+            $subID = $t->subjectID;
+        }
+        $topic = Topic::find($id)->delete();
+
+        return redirect(route("subject.edit",$subID));
     }
 }

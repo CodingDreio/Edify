@@ -84,3 +84,51 @@ li:hover{
     display: none;
 }
 
+.btn-primary{
+    background-color: #04c537;
+}
+
+.btn-primary:hover{
+    background-color: #017501;
+}
+
+.hr-border{
+    border: 2px solid #017501;
+}
+
+/* Text */
+
+.text-color-primary{
+    color:#02ad30;
+}
+
+.text-color-title{
+    color:#018725;
+}
+
+.text-color-edit{
+    color:#018725;
+}
+
+.text-color-remove{
+    color:#d9534f;
+}
+
+
+.btn-remove-topic{
+    border: none;
+    background-color: transparent;
+}
+
+
+.btn-tutor{
+    background-color: #015a01;
+}
+
+.btn-tutor:hover{
+    background-color: #028302;
+}
+
+.btn-tutor-width{
+    width: 95%;
+}

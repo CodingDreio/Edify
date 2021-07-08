@@ -37,7 +37,4 @@ imgInput.addEventListener("change",function(){
         defImage.style.display = "block";
         imgWarning.style.display = "none";
     }
-
-
 });
-

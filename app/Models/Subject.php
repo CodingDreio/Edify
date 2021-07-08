@@ -16,4 +16,9 @@ class Subject extends Model
         'description',
         'slot',
     ];
+
+    // protected function subjectTopic()
+    // {
+    //     return $this->hasmMany(Topic::class);
+    // }
 }

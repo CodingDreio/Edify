@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Subject;
+use App\Models\Topic;
 
 class ProfileController extends Controller
 {
@@ -17,8 +19,19 @@ class ProfileController extends Controller
     {
         $id = Auth::id();
         $user = User::where('id','=', $id)->get();
+        $subject = Subject::where('userID','=',$id)->get();
+        $topics = collect();
         
-        return view('profile.viewProfile',['user'=>$user]);
+        // $topic = Topic::where('subjectID','=',4)->get();
+        // dd($topic);
+
+        foreach($subject as $sub)
+        {
+            $subID = $sub->id;
+            $topic = Topic::where('subjectID','=',$subID)->get();
+            $topics->push($topic);
+        }
+        return view('profile.viewProfile',['user'=>$user,'subject'=>$subject,'topics'=>$topics]);
     }
 
     /**

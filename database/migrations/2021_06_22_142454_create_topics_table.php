@@ -20,7 +20,7 @@ class CreateTopicsTable extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->string('topic');
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
