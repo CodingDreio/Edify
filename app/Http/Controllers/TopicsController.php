@@ -71,8 +71,12 @@ class TopicsController extends Controller
      */
     public function edit($id)
     {
+<<<<<<< HEAD
         $topic = Topic::where('id','=',$id)->get();
         return view('subject.topic.updateTopic',['topic'=>$topic]);
+=======
+        //
+>>>>>>> f828708f6e6bbeb2d3160828a8c701339fc57c53
     }
 
     /**
@@ -84,6 +88,7 @@ class TopicsController extends Controller
      */
     public function update(Request $request, $id)
     {
+<<<<<<< HEAD
         $subID = $request->get('subIDInput');
         $topic = Topic::where('id',$id)->update([
             'topic'=>$request->get('topicInput'),
@@ -91,6 +96,9 @@ class TopicsController extends Controller
         ]);
 
         return redirect(route("subject.edit",$subID));
+=======
+        //
+>>>>>>> f828708f6e6bbeb2d3160828a8c701339fc57c53
     }
 
     /**
@@ -101,6 +109,7 @@ class TopicsController extends Controller
      */
     public function destroy($id)
     {
+<<<<<<< HEAD
         
         $tpc = Topic::where('id','=',$id)->get();
         $subID;
@@ -110,5 +119,8 @@ class TopicsController extends Controller
         $topic = Topic::find($id)->delete();
 
         return redirect(route("subject.edit",$subID));
+=======
+        //
+>>>>>>> f828708f6e6bbeb2d3160828a8c701339fc57c53
     }
 }

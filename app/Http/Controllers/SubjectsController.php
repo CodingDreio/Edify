@@ -50,6 +50,7 @@ class SubjectsController extends Controller
             'slot'=>$request->input('slotInput'),
         ]);
         return redirect()->route('subject.edit',$subject->id);
+        // return redirect()->route('topic.addTopic',$subject->id);
     }
 
     /**
@@ -74,6 +75,7 @@ class SubjectsController extends Controller
         $subject = Subject::where('id','=', $id)->get();
         $topics = Topic::where('subjectID','=',$id)->get();
         return view('subject.updateSubject',['subject'=>$subject, 'topics'=>$topics]);
+        // return view('subject.updateSubject');
     }
 
     /**
