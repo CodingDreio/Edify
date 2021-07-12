@@ -4,22 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\User;
-use App\Models\Subject;
 use App\Models\Topic;
+use App\Models\Subject;
 
-class HomeController extends Controller
+class TutorController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +18,46 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $active = 0;
+        return view('pages.tutor',['active'=>$active]);
+    }
+
+    public function subjectsTutor()
+    {
+        $active = 1;
+        return view('pages.tutor',['active'=>$active]);
+    }
+    
+    public function usersTutor()
+    {
+        $active = 2;
+        return view('pages.tutor',['active'=>$active]);
+    }
+    
+    public function search(Request $request)
+    {
+        $input = $request->get('search');
+        $id = Auth::id();
+        $active = $request->get('active');
+
+
+        $users = User::where([
+            ['name','LIKE','%'.$input.'%'],
+            ['id','!=',$id],
+            ])->get();
+        // $subjects = Subject::where('subject','LIKE','%'.$input.'%')->get();
+        $subjects = DB::table('subjects')
+        ->rightJoin('users', 'subjects.userID', '=', 'users.id')
+        ->select("subjects.*","users.name")
+        ->where('subjects.subject','LIKE','%'.$input.'%')
+        ->where('users.id','!=',$id)
+        ->get();
+
+        return view('pages.searchResult',[
+            'users'=>$users,
+            'subjects'=>$subjects,
+            'input'=>$input,
+            'active'=>$active]);
     }
 
     /**

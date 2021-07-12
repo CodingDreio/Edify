@@ -22,7 +22,12 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-003300 shadow-sm">
             <div class="container">
-                <a class="navbar-brand text-white" href="{{ url('/welcome') }}">
+                {{-- @if (str_contains(url()->current(), 'home'))
+                    <a class="navbar-brand text-white" href="{{ url('/home') }}">
+                        {{ config('app.name', 'Edify') }}
+                    </a>
+                @endif --}}
+                <a class="navbar-brand text-white" href="{{ url('/home') }}">
                     {{ config('app.name', 'Edify') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -51,24 +56,40 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item">
-                                <a class="nav-link text-white border-right" href="{{ route('home') }}">
-                                    <i class="fas fa-home" style="margin-right: 5px"></i>
-                                    Home
-                                </a>
-                            </li>
-                            {{-- <li class="nav-item">
-                                <a class="nav-link text-white border-right" href="#">
-                                    <i class="fas fa-chalkboard-teacher" style="margin-right: 5px"></i>
-                                    Tutors
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-white border-right" href="#">
-                                    <i class="fas fa-user-graduate" style="margin-right: 5px"></i>
-                                    Tutees
-                                </a>
-                            </li> --}}
+                            @if (!(str_contains(url()->current(), 'home')))
+                                @if ((str_contains(url()->current(), 'tutor')) || (str_contains(url()->current(), 'my_subjects')) || (str_contains(url()->current(), 'search_result')))
+                                    <li class="nav-item nav-active">
+                                        <a class="nav-link text-white border-right" href="{{ route('tutor.index') }}">
+                                            <i class="fas fa-chalkboard-teacher" style="margin-right: 5px"></i>
+                                            Tutors
+                                        </a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white border-right" href="{{ route('tutor.index') }}">
+                                            <i class="fas fa-chalkboard-teacher" style="margin-right: 5px"></i>
+                                            Tutors
+                                        </a>
+                                    </li>
+                                @endif
+
+                                @if (str_contains(url()->current(), 'tutee'))
+                                    <li class="nav-item nav-active">
+                                        <a class="nav-link text-white border-right" href="{{ route('tutee.index') }}">
+                                            <i class="fas fa-user-graduate" style="margin-right: 5px"></i>
+                                            Tutees
+                                        </a>
+                                    </li>
+                                @else
+                                    <li class="nav-item">
+                                        <a class="nav-link text-white border-right" href="{{ route('tutee.index') }}">
+                                            <i class="fas fa-user-graduate" style="margin-right: 5px"></i>
+                                            Tutees
+                                        </a>
+                                    </li>
+                                @endif
+                            @endif
+
                             <li class="nav-item">
                                 <a class="nav-link text-white border-right" href="{{ route('profile.index') }}">
                                     <i class="fas fa-user" style="margin-right: 5px"></i>
@@ -87,36 +108,13 @@
                                     @csrf
                                 </form>
                             </li>
-                            {{--
-                            <li class="nav-item dropdown text-white">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                   <i class="fas fa-user" style="margin-right: 5px"></i>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('profile.index') }}"><i class="fas fa-user-edit" style="margin-right: 10px"></i> Profile</a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        <i class="fas fa-sign-out-alt" style="margin-right: 10px"></i>
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                              --}}
                         @endguest
                     </ul>
                 </div>
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

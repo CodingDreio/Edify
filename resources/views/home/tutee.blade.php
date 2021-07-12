@@ -1,3 +1,0 @@
-@section('content')
-Hey
-@endsection

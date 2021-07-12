@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Subject;
 use App\Models\Topic;
+use App\Models\HomeDefaultView;
 
 class ProfileController extends Controller
 {
@@ -121,4 +122,23 @@ class ProfileController extends Controller
     {
         //
     }
+
+
+    // public function profileSettingsView()
+    // {
+    //     $id = Auth::id();
+    //     $defView = HomeDefaultView::where('userID','=', $id)->get();
+        
+    //     return view('/profile/settings',['homeDefaultView'=>$defView]);
+    // }
+
+
+    // public function updateHomeDefaultView(Request $request, $id)
+    // {
+    //     $set = HomeDefaultView::where('id','=', $id)->update([
+    //         'default' => $request->get('homeDefaultView'),
+    //     ]);
+
+    //     return redirect()->route('profile.settings');
+    // }
 }

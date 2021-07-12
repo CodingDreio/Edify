@@ -9,7 +9,9 @@
 						<div class="card">
 							<div class="card-body">
 								<div class="align-items-center text-center">
-									<img src="{{ asset('img/'.$profile->image) }}" alt="Profile Picture" class="rounded-circle" width="150">
+									<div class="imgDiv">
+										<img src="{{ asset('img/'.$profile->image) }}" alt="Profile Picture" class="rounded-circle imgProf">
+									</div>
 									<div class="mt-3">
 										<h4 class="text-color-title">{{ $profile->name }}</h4>
 										<p class="text-secondary mb-1">{{ $profile->description }}</p>

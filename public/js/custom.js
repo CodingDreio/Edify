@@ -38,3 +38,4 @@ imgInput.addEventListener("change",function(){
         imgWarning.style.display = "none";
     }
 });
+
