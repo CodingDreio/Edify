@@ -180,7 +180,7 @@ li:hover{
 /* ============================================================ */
 
 .li-hover:hover{
-    background-color: #f0eeee;
+    background-color: #d3fdcf;
 }
 
 .tab-link-style{
@@ -197,6 +197,7 @@ li:hover{
   color: #018725;
   font-weight: bold;
   background-color: #f8fafc;
+  border-width: 3px;
   border-color: #dee2e6 #dee2e6 #f8fafc;
 }
 
@@ -206,4 +207,83 @@ li:hover{
 
 .result-subject-text-secondary{
     color: gray;
+}
+
+.btn-view-profile{
+    color: #018725;
+}
+
+.btn-view-profile:hover{
+    background-color: #d3fdcf;
+    color: #018725;
+    font-weight: bold;
+}
+
+
+/* ============================================================ */
+/*                      View Tutor Profile Page                 */
+/* ============================================================ */
+
+.btn-apply{
+    color: #fff;
+    background-color: #015a01;
+}
+
+.btn-apply:hover{
+    background-color: #028302;
+    color: #fff;
+}
+
+
+.btn-decline{
+    color: #015a01;
+    background-color: #ffffff;
+    border: 1px solid #015a01;
+}
+
+.btn-decline:hover{
+    background-color: #ff0000;
+    color: #fff;
+}
+
+.border-bottom{
+    border: 0 0 1 0 solid #015a01;
+}
+
+/* ============================================================ */
+/*                      View Tutee's Class Page                 */
+/* ============================================================ */
+
+.text-margin-right{
+    margin-right: 20px;
+}
+
+
+.text-margin-left{
+    margin-left: 20px;
+}
+
+.text-margin-left-t{
+    margin-left: 20px;
+}
+
+@media (max-width: 500px) {
+    .text-margin-right{
+        margin-right: 0px;
+    }
+    
+    .text-margin-left{
+        margin-left: 0px;
+    }
+    .text-margin-left-t{
+        margin-left: 20px;
+    }
+}
+
+.activity-link{
+    background-color: transparent;
+}
+
+.activity-link:hover{
+    background-color: #d3fdcf;
 }

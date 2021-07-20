@@ -16,14 +16,19 @@ class CreateTakenSubjectsTable extends Migration
         
         Schema::create('taken_subjects', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pairID')
-            ->constrained('tutors')
+            $table->foreignId('tutorID')
+            ->constrained('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->foreignId('tuteeID')
+            ->constrained('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->foreignId('subjectID')
             ->constrained('subjects')
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->integer('status')->default(1);//[1] requested [2] accepted  [3] completed
             $table->integer('rate')->default(0);
             $table->timestamps();
         });

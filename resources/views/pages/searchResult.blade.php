@@ -23,7 +23,7 @@
             </ul>
 
             {{-- Tab Contents --}}
-            <div class="tab-content">
+            <div class="tab-content container-fluid">
 
                 {{-- People Search Results --}}
                 <div class="tab-pane active" role="tabpanel" id="peopleSearch">
@@ -52,6 +52,15 @@
                                                     <div class="col-sm-4">
                                                         <h6>Ratings</h6>
                                                         <h4>4.8</h4>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        {{-- <form action="/tutor_profile/{{ $user->id }}" method="POST">
+                                                            @csrf
+                                                            @method('POST')
+                                                            <input type="text" name="tutorID" id="tutorID" value="{{ $user->id }}" hidden>
+                                                            <button type="submit" class="btn btn-view-profile">View Profile</button>
+                                                        </form> --}}
+                                                        <a href="/tutor_profile/{{ $user->id }}" class="btn btn-view-profile">View Profile</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -82,23 +91,20 @@
                                         <div>
                                             <h6 class="result-subject-text-primary">{{ $subject->name }}</h6>
                                         </div>
+                                        <div>
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        
                         @empty
                             <div class="col-md-12 text-center">
                                 <h5>No subjects found! See people result.</h5>
                             </div>
-
                         @endforelse
                     </div>
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 @endsection

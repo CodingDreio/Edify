@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Topic;
 use App\Models\Subject;
+use App\Models\TakenSubjects;
 
 class TutorController extends Controller
 {
@@ -44,11 +45,12 @@ class TutorController extends Controller
         $users = User::where([
             ['name','LIKE','%'.$input.'%'],
             ['id','!=',$id],
-            ])->get();
+        ])->get();
+
         // $subjects = Subject::where('subject','LIKE','%'.$input.'%')->get();
         $subjects = DB::table('subjects')
         ->rightJoin('users', 'subjects.userID', '=', 'users.id')
-        ->select("subjects.*","users.name")
+        ->select("subjects.*","users.name","users.id")
         ->where('subjects.subject','LIKE','%'.$input.'%')
         ->where('users.id','!=',$id)
         ->get();
@@ -58,6 +60,66 @@ class TutorController extends Controller
             'subjects'=>$subjects,
             'input'=>$input,
             'active'=>$active]);
+    }
+
+    public function viewTutorProfile($id)
+    {
+        $user = User::where('id','=', $id)->get();
+        // $subject = Subject::where('userID','=',$id)->get();
+        $topics = collect([]);
+        $userID = Auth::id();
+
+        $subject = DB::table('subjects')
+            ->leftJoin('taken_subjects','subjects.id','=','taken_subjects.subjectID')
+            ->select('subjects.*','taken_subjects.status')
+            ->where('subjects.userID','=',$id)
+            ->get();
+        // dd($subject);
+
+        foreach($subject as $sub)
+        {
+            $subID = $sub->id;
+            $topic = Topic::where('subjectID','=',$subID)->get();
+            $topics->push($topic);
+        }
+        return view('profile.tutorProfile',['user'=>$user,'subject'=>$subject,
+            'topics'=>$topics,'id'=>$userID]);
+    }
+
+    public function applySubject(Request $request)
+    {
+        $subject = TakenSubjects::create([
+            'tutorID'=>$request->input('tutorID'),
+            'tuteeID'=>$request->input('userID'),
+            'subjectID'=>$request->input('subjectID'),
+        ]);
+        
+        $id = $request->input('tutorID');
+        return redirect()->route('viewTutorProfile',$id);
+    }
+
+    
+    public function cancelSubject(Request $request)
+    {
+        DB::table('taken_subjects')
+        ->where('subjectID', '=', $request->input('subjectID'))
+        ->where('tutorID', '=', $request->input('tutorID'))
+        ->where('tuteeID', '=', $request->input('userID'))
+        ->delete();
+        
+        return redirect()->route('viewTutorProfile',$request->input('tutorID'));
+    }
+
+    
+    public function completeSubject(Request $request)
+    {
+        DB::table('taken_subjects')
+            ->where('tutorID', $request->input('tutorID'))
+            ->where('tuteeID', $request->input('userID'))
+            ->where('subjectID', $request->input('subjectID'))
+            ->update(['status' => 3]);
+        
+        return redirect()->route('viewTutorProfile',$request->input('tutorID'));
     }
 
     /**

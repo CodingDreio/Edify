@@ -7,7 +7,7 @@
                 <div class="col-md-12 col-sm-12">
                     <a href="{{ route("profile.index") }}" class="btn btn-primary text-white">
                         <i class="fa fa-arrow-circle-left mr-2"></i>
-                        Back
+                        Done
                     </a>
                 </div>
                 <div class="col-md-12 col-sm-12">      
@@ -150,7 +150,7 @@
                 <div class="col-md-11 col-sm-11 m-auto">
                     <a href="{{ route("profile.index") }}" class="btn btn-primary text-white float-right">
                         <i class="fa fa-arrow-circle-left mr-2"></i>
-                        Back
+                        Done
                     </a>
                     <button type="button" class="btn btn-danger text-white float-right mr-3" data-toggle="modal" data-target="#removeSubjectModal">
                         <i class="fa fa-trash mr-2"></i>

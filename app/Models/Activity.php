@@ -5,15 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TakenSubjects extends Model
+class Activity extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'tutorID',
-        'tuteeID',
+        'id',
         'subjectID',
-        'rate',
-        'status',
+        'topicID',
+        'takenID',
+        'type',
+        'title',
+        'description',
+        'date',
+        'time',
+        'file',
     ];
 }
