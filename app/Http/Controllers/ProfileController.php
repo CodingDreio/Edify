@@ -94,7 +94,9 @@ class ProfileController extends Controller
         }else{ 
             $imgName = $id.'-'.time().'.'.$request->imgInput->extension();
             $request->imgInput->move(public_path('img'),$imgName);
-            unlink("img/".$defImg);
+            if($defImg != "user_default.png"){
+                unlink("img/".$defImg);
+            }
         }
 
         // Update user information in the database

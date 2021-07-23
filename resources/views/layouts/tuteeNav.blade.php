@@ -6,7 +6,7 @@
         
         <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
             <div class="navbar-nav mr-auto">
-                @switch($active)
+                {{-- @switch($active)
                     @case(1)
                         <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('tutee.index') }}">My Tutees</a>
                         <a class="nav-item nav-link  active text-white" style="font-weight:bold;" href="{{ route('myTuteesTimetable') }}">Timetable</a>
@@ -20,7 +20,7 @@
                     @default
                         <a class="nav-item nav-link active text-white" style="font-weight:bold;" href="{{ route('tutee.index') }}">My Tutees</a>
                         <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('myTuteesTimetable') }}">Timetable</a>
-                @endswitch
+                @endswitch --}}
             </div>
             <form class="form-inline my-2 my-lg-0" action="/search_result" method="POST">
                 @csrf

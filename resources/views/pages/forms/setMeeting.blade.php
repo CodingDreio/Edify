@@ -11,7 +11,7 @@
                 <h6 class="text-secondary">Please fill out the form. (<b class="text-danger">*</b>) Required</h6>
                 <br>
                 
-                <form action="/store_activity/7/23" method="POST">
+                <form action="/store_meeting/{{ $topicID }}/{{ $takenID }}" method="POST">
                     @csrf
                     @method("POST")
 
@@ -48,7 +48,7 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-apply float-right mr-1">Submit</button>
-                        <a href="/tutee_class/23" class="btn btn-danger float-right mr-1">Cancel</a>
+                        <a href="/tutee_class/{{ $takenID }}" class="btn btn-danger float-right mr-1">Cancel</a>
                     </div>
                     <br><br><br>
                 </form>

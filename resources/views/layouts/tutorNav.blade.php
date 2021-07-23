@@ -10,19 +10,19 @@
                     @case(1)
                         <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('tutor.index') }}">Timeline</a>
                         <a class="nav-item nav-link  active text-white" style="font-weight:bold;" href="{{ route('subjectsTutor') }}">Subjects</a>
-                        <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('usersTutor') }}">Tutors</a>
+                        {{-- <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('usersTutor') }}">Tutors</a> --}}
                         @break
 
                     @case(2)
                         <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('tutor.index') }}">Timeline</a><div class="nav-border-right"></div>
                         <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('subjectsTutor') }}">Subjects</a>
-                        <a class="nav-item nav-link active text-white" style="font-weight:bold;" href="{{ route('usersTutor') }}">Tutors</a>
+                        {{-- <a class="nav-item nav-link active text-white" style="font-weight:bold;" href="{{ route('usersTutor') }}">Tutors</a> --}}
                         @break
 
                     @default
                         <a class="nav-item nav-link active text-white" style="font-weight:bold;" href="{{ route('tutor.index') }}">Timeline</a>
                         <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('subjectsTutor') }}">Subjects</a><div class="nav-border-right"></div>
-                        <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('usersTutor') }}">Tutors</a>
+                        {{-- <a class="nav-item nav-link" style="color: #018725;font-weight:bold;" href="{{ route('usersTutor') }}">Tutors</a> --}}
                 @endswitch
             </div>
             <form class="form-inline my-2 my-lg-0" action="/search_result" method="POST">

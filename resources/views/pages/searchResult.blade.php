@@ -81,7 +81,7 @@
                     <div class="row mt-3">
                         @forelse ($subjects as $subject)
                             <div class="col-md-4 mb-3">
-                                <div class="card">
+                                <div class="card h-100">
                                     <div class="card-body">
                                         <div>
                                             <h5 class="result-subject-text-primary">{{ $subject->subject }}</h5>
@@ -89,7 +89,11 @@
                                         </div>
                                         <hr>
                                         <div>
-                                            <h6 class="result-subject-text-primary">{{ $subject->name }}</h6>
+                                            <h6 class="text-secondary"><strong>Tutor:</strong></h6>
+                                            <h5 class="result-subject-text-primary pl-3"><b>{{ $subject->name }}</b></h5>
+                                            <div class="text-center">
+                                                <a href="/tutor_profile/{{ $subject->userID }}" class="btn btn-view-profile">View Profile</a>
+                                            </div>
                                         </div>
                                         <div>
                                             

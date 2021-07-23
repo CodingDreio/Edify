@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Models\TakenSubjects;
+use App\Models\Activity;
+use App\Models\Subject;
+use App\Models\Topic;
+use App\Models\User;
 
 class TuteeController extends Controller
 {
@@ -113,6 +117,17 @@ class TuteeController extends Controller
             ->where('id', $request->input('requestID'))
             ->update(['status' => 2]);
         
+        $subject = DB::table('taken_subjects')->select('subjectID')->where('id', $request->input('requestID'))->get();
+        foreach($subject as $sub){
+            $slot = DB::table('subjects')->select('slot')->where('id','=',$sub->subjectID)->get();
+            foreach($slot as $slots){
+                $cnt = $slots->slot - 1;
+                DB::table('subjects')
+                    ->where('id', $sub->subjectID)
+                    ->update(['slot' => $cnt]);
+            }
+        }
+        
         return redirect()->route('tutee.index');
     }
 
@@ -124,45 +139,174 @@ class TuteeController extends Controller
     }
 
     public function viewTuteeClass($classID)
-    {
+    {   
         
-        return view('pages.tuteeClass',[]);
+        $takenSub = TakenSubjects::where('id','=',$classID)->get();
+        $tutee;
+        $subject;
+        foreach($takenSub as $taken){
+            $subject = Subject::where('id','=',$taken->subjectID)->get();
+            $tutee = User::where('id','=',$taken->tuteeID)->get();
+        }
+
+        $topics;
+
+        foreach($subject as $sub){
+            $topics = Topic::where('subjectID','=',$sub->id)->get();
+        }
+
+        $activityList  = collect([]);
+        $submitionList = collect([]);
+        foreach($topics as $topic){
+            $activities = Activity::where('topicID','=',$topic->id)->get();
+            $activityList->push($activities);
+            foreach($activities as $act){
+                $submit = DB::table('submitions')->where('activityID','=',$act->id)->get();
+                if($submit->isNotEmpty()){
+                    $submitionList->push($submit);
+                }
+            }
+        }
+        // dd($submitionList);
+
+        return view('pages.tuteeClass',['tutee'=>$tutee,'takenSubject'=>$takenSub,'subject'=>$subject,'topics'=>$topics,'activities'=>$activityList,'submissions'=>$submitionList,'classID'=>$classID]);
     }
 
 
+    // ====================================================================================
     // View Forms
+    // ====================================================================================
 
     public function addActivity($tutorID,$takenID)
     {   
-        return view('pages.forms.addActivity',['topicID'=>$tutorID,$takenID]);
+        return view('pages.forms.addActivity',['topicID'=>$tutorID,'takenID'=>$takenID]);
+    }
+    
+    public function viewSubmission($submissionID,$page,$classID)
+    {   
+        $submission = DB::table('submitions')->where('id','=',$submissionID)->get();
+        $submited;
+        foreach($submission as $sub){
+            $submited = $sub;
+        }
+        return view('pages.forms.viewSubmission',['submission'=>$submited,'page'=>$page,'classID'=>$classID]);
     }
     
     public function uploadMaterial($tutorID,$takenID)
     {
-        return view('pages.forms.uploadMaterial',['topicID'=>$tutorID,'takeID'=>$takenID]);
+        return view('pages.forms.uploadMaterial',['topicID'=>$tutorID,'takenID'=>$takenID]);
     }
     
     public function setMeeting($tutorID,$takenID)
     {
-        return view('pages.forms.setMeeting',['topicID'=>$tutorID,'takeID'=>$takenID]);
+        return view('pages.forms.setMeeting',['topicID'=>$tutorID,'takenID'=>$takenID]);
     }
 
     
+    // ====================================================================================
     // Store Data From Forms
+    // ====================================================================================
 
-    public function storeActivity($tutorID,$takenID)
+    public function storeActivity(Request $request,$topicID,$takenID)
     {   
-        return view('pages.forms.addActivity',['topicID'=>$tutorID,'takeID'=>$takenID]);
-    }
-    
-    public function storeMaterial($tutorID,$takenID)
-    {
-        return view('pages.forms.uploadMaterial',['topicID'=>$tutorID,'takeID'=>$takenID]);
-    }
-    
-    public function storeMeeting($tutorID,$takenID)
-    {
-        return view('pages.forms.setMeeting',['topicID'=>$tutorID,'takeID'=>$takenID]);
+        $time = $this->timeFormat($request->get('time'));
+        
+        $file = $request->file('file');
+        $fileName;
+        if($file == null){
+            $fileName = "NULL";
+        }else{
+            $fileName = "Assignment"." ".$request->get('title')."-".time().'-'.$takenID.'-'.$topicID.'.'.$request->file('file')->extension();
+            $request->file('file')->move(public_path('files'),$fileName);
+        }
+
+        $store = Activity::create([
+            'topicID'=>$topicID,
+            'takenID'=>$takenID,
+            'type'=>1,
+            'title'=>$request->get('title'),
+            'description'=>$request->get('description'),
+            'date' => $request->get('date'),
+            'time'=>$time,
+            'file'=>$fileName,
+        ]);
+
+        return redirect()->route('viewTuteeClass',$takenID);
     }
 
+    public function updateScore(Request $request,$submissionID,$classID){
+
+        $score = $request->get('score')." out of ".$request->get('range');
+        DB::table('submitions')->where('id','=',$submissionID)->update(['score'=>$score]);
+        return redirect()->route('viewTuteeClass',[$classID]);
+    }
+    
+    public function storeMaterial(Request $request,$topicID,$takenID)
+    {
+        $file = $request->file('file');
+        
+        $fileName;
+        if($file == null){
+            $fileName = NULL;
+        }else{
+            $fileName = "Learning Material"." ".$request->get('title')."-".time().'-'.$takenID.'-'.$topicID.'.'.$request->file('file')->extension();
+            $request->file('file')->move(public_path('files'),$fileName);
+        }
+
+        $store = Activity::create([
+            'topicID'=>$topicID,
+            'takenID'=>$takenID,
+            'type'=>2,
+            'title'=>$request->get('title'),
+            'description'=>$request->get('description'),
+            'file'=>$fileName,
+        ]);
+        return redirect()->route('viewTuteeClass',$takenID);
+    }
+    
+    public function storeMeeting(Request $request,$topicID,$takenID)
+    {
+        $time = $this->timeFormat($request->get('time'));
+
+        $store = Activity::create([
+            'topicID'=>$topicID,
+            'takenID'=>$takenID,
+            'type'=>3,
+            'title'=>$request->get('title'),
+            'description'=>$request->get('description'),
+            'date' => $request->get('date'),
+            'time'=>$time,
+        ]);
+
+        return redirect()->route('viewTuteeClass',$takenID);
+    }
+
+    public function timeFormat($time)
+    {
+        $timeSplit = explode(":", $time);
+        $hr = $timeSplit[0];
+        $min = $timeSplit[1];
+        $m;
+
+        if($hr >= 12){
+            $m = "PM";
+            $hr -= 12;
+        }
+        elseif($hr < 12){
+            $m = "AM";
+            if($hr==0){
+                $hr = 12;
+            }
+        }
+        else{
+            $m = "PM";
+        }
+        $time = "".$hr.":".$min." ".$m;
+
+        return $time;
+    }
+
+    public function downloadSubmission(Request $request,$file){
+        return response()->download(public_path("files/".$file));
+    }
 }

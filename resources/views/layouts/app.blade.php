@@ -16,6 +16,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="/css/Edify.ico">
 
 </head>
 <body>
@@ -56,6 +57,22 @@
                                 </li>
                             @endif
                         @else
+                            @if (!(str_contains(url()->current(), 'home') || (str_contains(url()->current(), 'notifications'))))
+                                <li class="nav-item">
+                                    <a class="nav-link text-white border-right" href="{{ route('home') }}">
+                                        <i class="fas fa-home" style="margin-right: 5px"></i>
+                                        Home
+                                    </a>
+                                </li>
+                            @else
+                                <li class="nav-item nav-active">
+                                    <a class="nav-link text-white border-right" href="{{ route('home') }}">
+                                        <i class="fas fa-home" style="margin-right: 5px"></i>
+                                        Home
+                                    </a>
+                                </li>
+                            @endif
+                            
                             @if (!(str_contains(url()->current(), 'home')))
                                 @if ((str_contains(url()->current(), 'tutor')) || (str_contains(url()->current(), 'my_subjects')) || (str_contains(url()->current(), 'search_result')))
                                     <li class="nav-item nav-active">

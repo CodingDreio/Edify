@@ -11,7 +11,7 @@
                 <h6 class="text-secondary">Please fill out the form. (<b class="text-danger">*</b>) Required</h6>
                 <br>
                 
-                <form action="/store_activity/7/23" method="POST">
+                <form action="/store_activity/{{ $topicID }}/{{ $takenID }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method("POST")
 
@@ -31,7 +31,7 @@
 
                     <div class="form-group">
                         <label class="text-color-title" for="file"><b>File</b></label>
-                        <input type="file" class="form-control-file" id="file" name="file" required>
+                        <input type="file" class="form-control-file" id="file" name="file" accept="">
                     </div>
 
                     <hr>
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-apply float-right mr-1">Submit</button>
-                        <a href="/tutee_class/23" class="btn btn-danger float-right mr-1">Cancel</a>
+                        <a href="/tutee_class/{{ $takenID }}" class="btn btn-danger float-right mr-1">Cancel</a>
                     </div>
                     <br><br><br>
                 </form>

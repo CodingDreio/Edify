@@ -98,6 +98,7 @@
 											<h4 class="text-color-title"><b>Offered Subjects</b></h4>
 										</div>
 										@foreach ($subject as $sub)
+                                            
                                             <div class="col-md-8 col-sm-8 m-auto">
                                                 <div class="card mb-3">
                                                     <div class="card-body">

@@ -166,7 +166,7 @@
 											<img src="" alt="New Profile Picture" class="rounded-circle imgPrev" width="150">
 										</div>
 										<div class="mt-3">
-											<input type="file" name="imgInput" id="imgInput" accept="image/*">
+											<input type="file" name="imgInput" id="imgInput" accept="file_extension | audio/* | video/* | image/* | media_type">
 										</div>
 										<div class="imgWarning mt-2">
 											<h6 class="text-danger">

@@ -15,10 +15,6 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subjectID')
-                ->constrained('subjects')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
             $table->foreignId('topicID')
                 ->constrained('topics')
                 ->onUpdate('cascade')
@@ -33,6 +29,7 @@ class CreateActivitiesTable extends Migration
             $table->string('date')->nullable();
             $table->string('time')->nullable();
             $table->string('file')->nullable();
+            $table->integer('status')->default(1);  //[1] For incomplete [2] complete
             $table->timestamps();
         });
     }
